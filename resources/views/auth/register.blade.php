@@ -35,6 +35,13 @@
 							</div>
 						</div>
 
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Province</label>
+                            <div class="col-md-6">
+                                {!! Form::select('province_id', App\Province::lists('name', 'id'), null, ['class'=> 'form-control']) !!}
+                            </div>
+                        </div>
+
 						<div class="form-group">
 							<label class="col-md-4 control-label">Password</label>
 							<div class="col-md-6">

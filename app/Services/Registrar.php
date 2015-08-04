@@ -14,11 +14,14 @@ class Registrar implements RegistrarContract {
 	 */
 	public function validator(array $data)
 	{
+        $messages = ['province_id.required' => 'The province is required'];
+
 		return Validator::make($data, [
 			'name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
-		]);
+            'province_id' => 'required',
+		], $messages);
 	}
 
 	/**
@@ -32,6 +35,7 @@ class Registrar implements RegistrarContract {
 		return User::create([
 			'name' => $data['name'],
 			'email' => $data['email'],
+            'province_id' => $data['province_id'],
 			'password' => bcrypt($data['password']),
 		]);
 	}
