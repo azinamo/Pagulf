@@ -19,7 +19,8 @@ class CreateStokvelTable extends Migration {
            $table->decimal('amount');
            $table->date('start_date');
            $table->date('end_date');
-           $table->boolean('is_active');
+           $table->boolean('has_payment_order')->nullable();
+           $table->boolean('is_active')->nullable();
            $table->timestamps();
         });
 	}

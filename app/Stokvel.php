@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class Stokvel extends Model {
 
@@ -32,9 +33,9 @@ class Stokvel extends Model {
     }
 
 
-    public function userIsMember($stokvel_id)
+    public function userIsMember($stokvel_id, $user_id)
     {
-        $isMember = UserStokvel::firstByAttributes(array('stokvel_id' => $stokvel_id));
+        $isMember = UserStokvel::firstByAttributes(array('stokvel_id' => $stokvel_id, 'user_id' => $user_id));
         if($isMember) return true;
         return false;
     }

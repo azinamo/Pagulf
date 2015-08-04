@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1>{{ $stokvel->name  }}</h1>
     <table width="100%" class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -10,13 +11,13 @@
             </tr>
         </thead>
         <tbody>
-            @if($stokvel->users()->count())
-                <tr>
-                    @foreach($stokvel->users as $stokvel_user)
+            @if($user_stokvel->count())
+                @foreach($user_stokvel as $stokvel_user)
+                    <tr>
                         <td>{{ $stokvel_user->position  }}</td>
-                        <td>{{ $stokvel_user->email  }}</td>
-                    @endforeach
-                </tr>
+                        <td>{{ $stokvel_user->user->name  }}</td>
+                    </tr>
+                @endforeach
            @else
                 <tr>
                     <td colspan="6">There are no stokvel users available</td>
@@ -24,8 +25,8 @@
            @endif
         </tbody>
     </table>
-    @if($stokvel->users()->count())
-        <a href="{{ URL::to('stokvels/create') }}" class="btn btn-success">Generate Order</a>
+    @if($user_stokvel->count() && !$stokvel->has_payment_order)
+        <a href="{{ URL::to('stokvels/generate/'.$stokvel->id) }}" class="btn btn-success">Generate Order</a>
     @endif
 
 </div>

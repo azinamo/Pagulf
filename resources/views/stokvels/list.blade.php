@@ -34,7 +34,7 @@
                             <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
                             <!-- we will add this later since its a little more complicated than the other two buttons -->
 
-                            @if($stokvel->userIsMember($stokvel->id))
+                            @if($stokvel->userIsMember($stokvel->id, Auth::user()->id))
                                 <a class="btn btn-small btn-danger" href="{{ URL::to('stokvels/exit/' . $stokvel->id ) }}">Exit</a>
                             @else
                                 <a class="btn btn-small btn-success" href="{{ URL::to('stokvels/join/' . $stokvel->id) }}">Join</a>
@@ -47,9 +47,9 @@
                             <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                             <a class="btn btn-small btn-info" href="{{ URL::to('stokvels/' . $stokvel->id . '/edit') }}">Edit</a>
 
-
-                            <a class="btn btn-small btn-warning" href="{{ URL::to('stokvels/users/' . $stokvel->id . '') }}">Generate Payment Order</a>
-
+                            @if(!$stokvel->has_payment_order)
+                                <a class="btn btn-small btn-warning" href="{{ URL::to('stokvels/users/' . $stokvel->id . '') }}">Generate Payment Order</a>
+                            @endif
 
                         </td>
                     @endforeach

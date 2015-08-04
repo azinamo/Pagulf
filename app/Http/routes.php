@@ -24,6 +24,7 @@ Route::get('stokvels/join/{id}', 'StokvelController@join');
 Route::get('stokvels/exit/{id}', 'StokvelController@exitStokvel');
 Route::get('stokvels/invite/{id}', 'StokvelController@invite');
 Route::get('stokvels/users/{id}', 'StokvelController@users');
+Route::get('stokvels/generate/{id}', 'StokvelController@generate');
 
 Route::resource('stokvels', 'StokvelController');
 
