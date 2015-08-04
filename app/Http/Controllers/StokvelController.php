@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use Auth;
+use DB;
 
 class StokvelController extends Controller {
 
@@ -182,5 +183,54 @@ class StokvelController extends Controller {
         Mail::send('emails.invite', array('' => ''), function($message){
             $message->to(Input::get('email_address'))->subject(Auth::user()->first_name.' invited you to join '.$stokvel->name);
         });
+    }
+
+    public function users($id)
+    {
+        $user_stokvel = UserStokvel::where('stokvel_id', '=', $id)->get();
+        return view('stokvels.users', array('user_stokvel' => $user_stokvel, 'stokvel' => Stokvel::find($id)));
+    }
+
+    public function generate($id)
+    {
+        $stokvel_users = UserStokvel::where('stokvel_id', '=', $id)->get();
+        $list = array();
+        $available_positions = 0;
+        foreach($stokvel_users as $stokvel_user)
+        {
+            $list[$stokvel_user->user->province_id][] = $stokvel_user->user_id;
+            $available_positions++;
+        }
+        $positions = range(1, $available_positions);
+        //echo "positions -- ".$available_positions;
+        $i = 0;
+        foreach($list as $province => $province_users)
+        {
+            array_rand($province_users);
+            foreach($province_users as $index => $user)
+            {
+                if(isset($positions[$i]))
+                {
+                    $user_positions[$user] = $positions[$i];
+                }
+                $i++;
+            }
+        }
+        foreach($stokvel_users as $stokvel_user)
+        {
+            if(isset($user_positions[$stokvel_user->user_id]))
+            {
+                //$stk = UserStokvel::find($stokvel_user->id);
+                //$stk->position = $user_positions[$stokvel_user->user_id];
+                //$stk->save();
+                DB::table('user_stokvels')
+                    ->where('stokvel_id', $stokvel_user->stokvel_id)->where('user_id', $stokvel_user->user_id)
+                    ->update(['position' => $user_positions[$stokvel_user->user_id]]);
+            }
+        }
+        DB::table('stokvel')->where('id', $id)->update(['has_payment_order' => TRUE]);
+
+        Session::flash('message', 'You have successfully generated the stokvel payment order');
+        return Redirect::to('stokvels/users/'.$id);
     }
 }

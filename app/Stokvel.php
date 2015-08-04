@@ -2,16 +2,11 @@
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-
+use Illuminate\Support\Facades\Auth;
 class Stokvel extends Model {
 
     protected  $table = 'stokvel';
 
-    // has many users
-    public function users()
-    {
-        return $this->hasMany('App\User');
-    }
 
     // has many payment logs
     public function paymentLogs()
@@ -25,9 +20,22 @@ class Stokvel extends Model {
         return $this->hasMany('PaymentOrder', 'stokvel_id')->order();
     }
 
-    public function userIsMember($stokvel_id)
+    // has many payment orders
+    public function userStokvels()
     {
-        $isMember = UserStokvel::firstByAttributes(array('stokvel_id' => $stokvel_id));
+        return $this->belongsToMany('App\UserStokvel', 'user_stokvels');
+    }
+
+    // has many payment orders
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'user_stokvels');
+    }
+
+
+    public function userIsMember($stokvel_id, $user_id)
+    {
+        $isMember = UserStokvel::firstByAttributes(array('stokvel_id' => $stokvel_id, 'user_id' => $user_id));
         if($isMember) return true;
         return false;
     }

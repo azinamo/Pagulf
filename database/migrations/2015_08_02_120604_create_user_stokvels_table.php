@@ -14,11 +14,13 @@ class CreateUserStokvelsTable extends Migration {
 	{
 		Schema::create('user_stokvels', function(Blueprint $table)
 		{
-			$table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->integer('user_id');
-            $table->integer('stokvel_id');
+            $table->integer('stokvel_id')->unsigned()->index();
+            $table->foreign('stokvel_id')->references('id')->on('stokvel')->onDelete('cascade');
 
+            $table->integer('position')->nullable();
             $table->timestamps();
 		});
 	}
