@@ -7,6 +7,7 @@
 	<title>PaGulf Ads</title>
 
 	<link href="/css/app.css" rel="stylesheet">
+    <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -28,13 +29,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">PaGulf</a>
+				<a class="navbar-brand" href="#">Stokvel</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
-				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
@@ -42,13 +40,10 @@
 						<li><a href="/auth/register">Register</a></li>
 					@else
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-                            <li><a href="/auth/login">Listings</a></li>
-                            <li><a href="/auth/register">My Account</a></li>
-                            <li><a href="/auth/register">Post An Ad</a></li>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="/auth/logout">Logout</a></li>
-							</ul>
+                            <li><a href="/">{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{ URL::to('stokvels') }}">Stovels</a></li>
+                            <li><a href="/account">My Account</a></li>
+                            <li><a href="/auth/logout">Logout</a></li>
 						</li>
 					@endif
 				</ul>
@@ -61,5 +56,12 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $('.container .input-daterange').datepicker({
+            format: "dd/mm/yyyy",
+            calendarWeeks: true
+        });
+    </script>
 </body>
 </html>

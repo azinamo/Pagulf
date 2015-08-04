@@ -19,3 +19,15 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('stokvels/join/{id}', 'StokvelController@join');
+Route::get('stokvels/exit/{id}', 'StokvelController@exitStokvel');
+Route::get('stokvels/invite/{id}', 'StokvelController@invite');
+Route::get('stokvels/users/{id}', 'StokvelController@users');
+
+Route::resource('stokvels', 'StokvelController');
+
+
+
+
+Route::get('account', 'UserController@index');

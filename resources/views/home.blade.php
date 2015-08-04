@@ -8,7 +8,7 @@
 				<div class="panel-heading">Home</div>
 
 				<div class="panel-body">
-					You are logged in!
+					Welcome to Stokvel
 				</div>
 			</div>
 		</div>
