@@ -181,7 +181,6 @@ class StokvelController extends Controller {
     {
         $stokvel = Stokvel::find($id);
         Mail::send('emails.invite', array('' => ''), function($message){
-
             $message->to(Input::get('email_address'))->subject(Auth::user()->first_name.' invited you to join '.$stokvel->name);
         });
     }

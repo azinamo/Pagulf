@@ -3,21 +3,21 @@
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-
 class Stokvel extends Model {
 
     protected  $table = 'stokvel';
 
-    // has many users
-    //public function users()
-    //{
-        //return $this->hasMany('App\User');
-    //}
 
     // has many payment logs
     public function paymentLogs()
     {
-        return $this->hasMany('PaymentLogs', 'stokvel_id');
+        return $this->hasMany('PaymentLogs', 'stokvel_id')->order();
+    }
+
+    // has many payment orders
+    public function paymentOrders()
+    {
+        return $this->hasMany('PaymentOrder', 'stokvel_id')->order();
     }
 
     // has many payment orders

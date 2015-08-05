@@ -42,7 +42,7 @@
 						<li class="dropdown">
                             <li><a href="/">{{ Auth::user()->name }}</a></li>
                             <li><a href="{{ URL::to('stokvels') }}">Stovels</a></li>
-                            <li><a href="/account">My Account</a></li>
+                            <!--<li><a href="/account">My Account</a></li> -->
                             <li><a href="/auth/logout">Logout</a></li>
 						</li>
 					@endif

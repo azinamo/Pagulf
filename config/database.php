@@ -54,10 +54,10 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'pagulf'),
-			'username'  => env('DB_USERNAME', 'root'),
-			'password'  => env('DB_PASSWORD', 'WIhxYwcH'),
+			'host'      => env('DB_HOST', 'sql16.cpt4.host-h.net'),
+			'database'  => env('DB_DATABASE', 'drivevbyem_db3'),
+			'username'  => env('DB_USERNAME', 'drivevbyem_3'),
+			'password'  => env('DB_PASSWORD', 'AH3cSD98'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
