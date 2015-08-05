@@ -13,6 +13,7 @@ class CreatePaymentOrdersTable extends Migration {
 	public function up()
 	{
 		//
+        /*
         Schema::create('payment_orders', function(Blueprint $table){
             $table->increments('id');
 
@@ -25,6 +26,7 @@ class CreatePaymentOrdersTable extends Migration {
             $table->integer('position');
             $table->timestamps();
         });
+        */
 	}
 
 	/**
@@ -35,7 +37,9 @@ class CreatePaymentOrdersTable extends Migration {
 	public function down()
 	{
 		//
+        /*
         Schema::drop('payment_orders');
+        */
 	}
 
 }

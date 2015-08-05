@@ -16,7 +16,9 @@
 
         <div class="form-group">
             {!! Form::label('amount', 'Amount') !!}
-            {!! Form::text('amount', Input::old('amount'), array('class' => 'form-control')) !!}
+            <span class="input-group-addon">R</span>
+             {!! Form::text('amount', Input::old('amount'), array('class' => 'form-control')) !!}
+            <span class="input-group-addon">.00</span>
         </div>
 
         <div class="form-group">
